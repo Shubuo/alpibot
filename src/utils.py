@@ -54,8 +54,17 @@ def get_milestone_countdown(career: dict) -> list[str]:
     return countdowns
 
 def send_telegram_photo(photo_path: str, caption: str = ""):
-    if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID: return
+    if not TELEGRAM_BOT_TOKEN or not TELEGRAM_CHAT_ID: 
+        print("⚠️ Telegram token veya Chat ID eksik!")
+        return
     try:
-        with open(photo_path, 'rb') as photo:
-            requests.post(f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendPhoto", data={"chat_id": TELEGRAM_CHAT_ID, "caption": caption, "parse_mode": "Markdown"}, files={"photo": photo}, timeout=20)
-    except: pass
+        url = f"https://api.telegram.org/bot{TELEGRAM_BOT_TOKEN}/sendPhoto"
+        files = {'photo': open(photo_path, 'rb')}
+        data = {'chat_id': TELEGRAM_CHAT_ID, 'caption': caption, 'parse_mode': 'Markdown'}
+        resp = requests.post(url, data=data, files=files, timeout=20)
+        if resp.status_code != 200:
+            print(f"❌ Telegram API Hatası: {resp.status_code} - {resp.text}")
+        else:
+            print("✅ Telegram mesajı başarıyla gönderildi.")
+    except Exception as e:
+        print(f"💥 Telegram gönderim hatası: {e}")
