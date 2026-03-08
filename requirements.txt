@@ -1,0 +1,7 @@
+nba_api
+tweepy
+python-dotenv
+google-genai
+requests
+pandas
+Pillow

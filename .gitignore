@@ -1,0 +1,30 @@
+# Environment variables
+.env
+
+# Databases & Cache
+*.db
+*.json
+__pycache__/
+*.py[cod]
+.venv/
+
+# Deployment & Internal Assets
+Artifacts/
+stat_card.png
+
+# Assets & Documentation
+*.docx
+*.pdf
+*.zip
+
+# README.md hariç tüm md dosyalarını ignore et
+*.md
+!README.md
+
+# Visuals & Media (Generated)
+*.png
+*.jpg
+*.jpeg
+
+# System files
+.DS_Store
